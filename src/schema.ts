@@ -46,7 +46,7 @@ type NamedAPIResource {
 }
 
 type Query {
-    berries(first: Int, after: String, last: Int, before: String): BerryConnection!
+    berries(first: Int, after: String): BerryConnection!
     berry(id: Int!): Berry
 }
 `);
