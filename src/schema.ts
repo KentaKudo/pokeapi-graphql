@@ -8,6 +8,16 @@ type PageInfo {
     endCursor: String
 }
 
+type NamedAPIResource {
+    name: String!
+    url: String!
+}
+
+type Name {
+    name: String!
+    language: NamedAPIResource!
+}
+
 type BerryConnection {
     edges: [BerryEdge]
     nodes: [Berry]
@@ -40,14 +50,31 @@ type BerryFlavorMap {
     flavor: NamedAPIResource!
 }
 
-type NamedAPIResource {
+type BerryFirmnessConnection {
+    edges: [BerryFirmnessEdge]
+    nodes: [BerryFirmness]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type BerryFirmnessEdge {
+    node: BerryFirmness
+    cursor: String!
+}
+
+type BerryFirmness {
+    id: Int!
     name: String!
-    url: String!
+    berries: [NamedAPIResource!]!
+    names: [Name!]!
 }
 
 type Query {
     berries(first: Int, after: String): BerryConnection!
     berry(id: Int!): Berry
+
+    berryFirmnesses(first: Int, after: String): BerryFirmnessConnection!
+    berryFirmness(id: Int!): BerryFirmness
 }
 `);
 
