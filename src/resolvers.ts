@@ -6,7 +6,7 @@ const berryFirmnessEndpoint = `${baseURL}/berry-firmness`;
 
 interface ConnectionQuery {
   first: number;
-  after: string | undefined;
+  after?: string;
 }
 
 type PaginationQuery =
@@ -87,8 +87,6 @@ const connection = (endpoint: string) => async <
       fetch(url).then((res) => res.json())
     )
   );
-
-  console.log(nodes);
 
   const edges = nodes.map((node: T) => ({
     node,
