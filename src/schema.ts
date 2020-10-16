@@ -24,7 +24,7 @@ type Effect {
 }
 
 type FlavorText {
-    flavor_text: String!
+    flavorText: String!
     language: NamedAPIResource!
     version: NamedAPIResource
 }
@@ -44,16 +44,16 @@ type BerryEdge {
 type Berry {
     id: Int!
     name: String!
-    growth_time: Int!
-    max_harvest: Int!
-    natural_gift_power: Int!
+    growthTime: Int!
+    maxHarvest: Int!
+    naturalGiftPower: Int!
     size: Int!
     smoothness: Int!
-    soil_dryness: Int!
+    soilDryness: Int!
     firmness: NamedAPIResource!
     flavors: [BerryFlavorMap!]!
     item: NamedAPIResource!
-    natural_gift_type: NamedAPIResource!
+    naturalGiftType: NamedAPIResource!
 }
 
 type BerryFlavorMap {
@@ -96,7 +96,7 @@ type BerryFlavor {
     id: Int!
     name: String!
     berries: [FlavorBerryMap!]!
-    contest_type: NamedAPIResource!
+    contestType: NamedAPIResource!
     names: [Name!]!
 }
 
@@ -120,7 +120,7 @@ type ContestTypeEdge {
 type ContestType {
     id: Int!
     name: String!
-    berry_flavor: NamedAPIResource!
+    berryFlavor: NamedAPIResource!
     names: [ContestName!]!
 }
 
@@ -146,8 +146,8 @@ type ContestEffect {
     id: Int!
     appeal: Int!
     jam: Int!
-    effect_entries: [Effect!]!
-    flavor_text_entries: [FlavorText!]!
+    effectEntries: [Effect!]!
+    flavorTextEntries: [FlavorText!]!
 }
 
 type Query {

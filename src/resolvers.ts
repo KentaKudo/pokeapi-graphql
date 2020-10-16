@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import camelcaseKeys from "camelcase-keys";
 
 const baseURL = "https://pokeapi.co/api/v2";
 const berryEndpoint = `${baseURL}/berry`;
@@ -99,7 +100,9 @@ const connection = (endpoint: string) => async <
 
   const nodes: T[] = await Promise.all(
     results.map(({ url }: NamedAPIResource) =>
-      fetch(url).then((res) => res.json())
+      fetch(url)
+        .then((res) => res.json())
+        .then((obj) => camelcaseKeys(obj, { deep: true }))
     )
   );
 
@@ -132,7 +135,9 @@ const connection = (endpoint: string) => async <
 export const berries: ConnectionFn<Berry> = connection(berryEndpoint);
 
 export const berry = ({ id }: { id: number }) =>
-  fetch(`${berryEndpoint}/${id}`).then((res) => res.json());
+  fetch(`${berryEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));
 
 export const berryFirmnesses: ConnectionFn<BerryFirmness> = connection(
   berryFirmnessEndpoint
