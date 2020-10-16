@@ -18,6 +18,17 @@ type Name {
     language: NamedAPIResource!
 }
 
+type Effect {
+    effect: String!
+    language: NamedAPIResource!
+}
+
+type FlavorText {
+    flavor_text: String!
+    language: NamedAPIResource!
+    version: NamedAPIResource
+}
+
 type BerryConnection {
     edges: [BerryEdge]
     nodes: [Berry]
@@ -69,12 +80,91 @@ type BerryFirmness {
     names: [Name!]!
 }
 
+type BerryFlavorConnection {
+    edges: [BerryFlavorEdge]
+    nodes: [BerryFlavor]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type BerryFlavorEdge {
+    node: BerryFlavor
+    cursor: String!
+}
+
+type BerryFlavor {
+    id: Int!
+    name: String!
+    berries: [FlavorBerryMap!]!
+    contest_type: NamedAPIResource!
+    names: [Name!]!
+}
+
+type FlavorBerryMap {
+    potency: Int!
+    berry: NamedAPIResource!
+}
+
+type ContestTypeConnection {
+    edges: [ContestTypeEdge]
+    nodes: [ContestType]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type ContestTypeEdge {
+    node: ContestType
+    cursor: String!
+}
+
+type ContestType {
+    id: Int!
+    name: String!
+    berry_flavor: NamedAPIResource!
+    names: [ContestName!]!
+}
+
+type ContestName {
+    name: String!
+    color: String!
+    language: NamedAPIResource!
+}
+
+type ContestEffectConnection {
+    edges: [ContestEffectEdge]
+    nodes: [ContestEffect]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type ContestEffectEdge {
+    node: ContestEffect
+    cursor: String!
+}
+
+type ContestEffect {
+    id: Int!
+    appeal: Int!
+    jam: Int!
+    effect_entries: [Effect!]!
+    flavor_text_entries: [FlavorText!]!
+}
+
 type Query {
     berries(first: Int, after: String): BerryConnection!
     berry(id: Int!): Berry
 
     berryFirmnesses(first: Int, after: String): BerryFirmnessConnection!
     berryFirmness(id: Int!): BerryFirmness
+
+    berryFlavors(first: Int, after: String): BerryFlavorConnection!
+    berryFlavor(id: Int!): BerryFlavor
+
+    contestTypes(first: Int, after: String): ContestTypeConnection!
+    contestType(id: Int!): ContestType
+
+    contestEffects(first: Int, after: String): ContestEffectConnection!
+    contestEffect(id: Int!): ContestEffect
 }
 `);
 

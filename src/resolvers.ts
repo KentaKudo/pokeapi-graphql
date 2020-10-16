@@ -3,6 +3,9 @@ import fetch from "node-fetch";
 const baseURL = "https://pokeapi.co/api/v2";
 const berryEndpoint = `${baseURL}/berry`;
 const berryFirmnessEndpoint = `${baseURL}/berry-firmness`;
+const berryFlavorEndpoint = `${baseURL}/berry-flavor`;
+const contestTypeEndpoint = `${baseURL}/contest-type`;
+const contestEffectEndpoint = `${baseURL}/contest-effect`;
 
 interface ConnectionQuery {
   first: number;
@@ -32,6 +35,18 @@ interface Berry {
 }
 
 interface BerryFirmness {
+  id: number;
+}
+
+interface BerryFlavor {
+  id: number;
+}
+
+interface ContestType {
+  id: number;
+}
+
+interface ContestEffect {
   id: number;
 }
 
@@ -125,3 +140,24 @@ export const berryFirmnesses: ConnectionFn<BerryFirmness> = connection(
 
 export const berryFirmness = ({ id }: { id: number }) =>
   fetch(`${berryFirmnessEndpoint}/${id}`).then((res) => res.json());
+
+export const berryFlavors: ConnectionFn<BerryFlavor> = connection(
+  berryFlavorEndpoint
+);
+
+export const berryFlavor = ({ id }: { id: number }) =>
+  fetch(`${berryFlavorEndpoint}/${id}`).then((res) => res.json());
+
+export const contestTypes: ConnectionFn<ContestType> = connection(
+  contestTypeEndpoint
+);
+
+export const contestType = ({ id }: { id: number }) =>
+  fetch(`${contestTypeEndpoint}/${id}`).then((res) => res.json());
+
+export const contestEffects: ConnectionFn<ContestEffect> = connection(
+  contestEffectEndpoint
+);
+
+export const contestEffect = ({ id }: { id: number }) =>
+  fetch(`${contestEffectEndpoint}/${id}`).then((res) => res.json());
