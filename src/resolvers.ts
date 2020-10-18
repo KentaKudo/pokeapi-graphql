@@ -149,28 +149,36 @@ export const berryFirmnesses: ConnectionFn<BerryFirmness> = connection(
 );
 
 export const berryFirmness = ({ id }: { id: number }) =>
-  fetch(`${berryFirmnessEndpoint}/${id}`).then((res) => res.json());
+  fetch(`${berryFirmnessEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));
 
 export const berryFlavors: ConnectionFn<BerryFlavor> = connection(
   berryFlavorEndpoint
 );
 
 export const berryFlavor = ({ id }: { id: number }) =>
-  fetch(`${berryFlavorEndpoint}/${id}`).then((res) => res.json());
+  fetch(`${berryFlavorEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));
 
 export const contestTypes: ConnectionFn<ContestType> = connection(
   contestTypeEndpoint
 );
 
 export const contestType = ({ id }: { id: number }) =>
-  fetch(`${contestTypeEndpoint}/${id}`).then((res) => res.json());
+  fetch(`${contestTypeEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));
 
 export const contestEffects: ConnectionFn<ContestEffect> = connection(
   contestEffectEndpoint
 );
 
 export const contestEffect = ({ id }: { id: number }) =>
-  fetch(`${contestEffectEndpoint}/${id}`).then((res) => res.json());
+  fetch(`${contestEffectEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));
 
 export const pokemons: ConnectionFn<Pokemon> = connection(pokemonEndpoint);
 
