@@ -7,6 +7,7 @@ const berryFirmnessEndpoint = `${baseURL}/berry-firmness`;
 const berryFlavorEndpoint = `${baseURL}/berry-flavor`;
 const contestTypeEndpoint = `${baseURL}/contest-type`;
 const contestEffectEndpoint = `${baseURL}/contest-effect`;
+const pokemonEndpoint = `${baseURL}/pokemon`;
 
 interface ConnectionQuery {
   first: number;
@@ -48,6 +49,10 @@ interface ContestType {
 }
 
 interface ContestEffect {
+  id: number;
+}
+
+interface Pokemon {
   id: number;
 }
 
@@ -166,3 +171,10 @@ export const contestEffects: ConnectionFn<ContestEffect> = connection(
 
 export const contestEffect = ({ id }: { id: number }) =>
   fetch(`${contestEffectEndpoint}/${id}`).then((res) => res.json());
+
+export const pokemons: ConnectionFn<Pokemon> = connection(pokemonEndpoint);
+
+export const pokemon = ({ id }: { id: number }) =>
+  fetch(`${pokemonEndpoint}/${id}`)
+    .then((res) => res.json())
+    .then((obj) => camelcaseKeys(obj, { deep: true }));

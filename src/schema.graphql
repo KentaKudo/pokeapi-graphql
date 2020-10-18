@@ -1,0 +1,264 @@
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type NamedAPIResource {
+  name: String!
+  url: String!
+}
+
+type Name {
+  name: String!
+  language: NamedAPIResource!
+}
+
+type Effect {
+  effect: String!
+  language: NamedAPIResource!
+}
+
+type VersionGameIndex {
+  gameIndex: Int!
+  version: NamedAPIResource!
+}
+
+type FlavorText {
+  flavorText: String!
+  language: NamedAPIResource!
+  version: NamedAPIResource
+}
+
+type BerryConnection {
+  edges: [BerryEdge]
+  nodes: [Berry]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type BerryEdge {
+  node: Berry
+  cursor: String!
+}
+
+type Berry {
+  id: Int!
+  name: String!
+  growthTime: Int!
+  maxHarvest: Int!
+  naturalGiftPower: Int!
+  size: Int!
+  smoothness: Int!
+  soilDryness: Int!
+  firmness: NamedAPIResource!
+  flavors: [BerryFlavorMap!]!
+  item: NamedAPIResource!
+  naturalGiftType: NamedAPIResource!
+}
+
+type BerryFlavorMap {
+  potency: Int!
+  flavor: NamedAPIResource!
+}
+
+type BerryFirmnessConnection {
+  edges: [BerryFirmnessEdge]
+  nodes: [BerryFirmness]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type BerryFirmnessEdge {
+  node: BerryFirmness
+  cursor: String!
+}
+
+type BerryFirmness {
+  id: Int!
+  name: String!
+  berries: [NamedAPIResource!]!
+  names: [Name!]!
+}
+
+type BerryFlavorConnection {
+  edges: [BerryFlavorEdge]
+  nodes: [BerryFlavor]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type BerryFlavorEdge {
+  node: BerryFlavor
+  cursor: String!
+}
+
+type BerryFlavor {
+  id: Int!
+  name: String!
+  berries: [FlavorBerryMap!]!
+  contestType: NamedAPIResource!
+  names: [Name!]!
+}
+
+type FlavorBerryMap {
+  potency: Int!
+  berry: NamedAPIResource!
+}
+
+type ContestTypeConnection {
+  edges: [ContestTypeEdge]
+  nodes: [ContestType]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ContestTypeEdge {
+  node: ContestType
+  cursor: String!
+}
+
+type ContestType {
+  id: Int!
+  name: String!
+  berryFlavor: NamedAPIResource!
+  names: [ContestName!]!
+}
+
+type ContestName {
+  name: String!
+  color: String!
+  language: NamedAPIResource!
+}
+
+type ContestEffectConnection {
+  edges: [ContestEffectEdge]
+  nodes: [ContestEffect]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ContestEffectEdge {
+  node: ContestEffect
+  cursor: String!
+}
+
+type ContestEffect {
+  id: Int!
+  appeal: Int!
+  jam: Int!
+  effectEntries: [Effect!]!
+  flavorTextEntries: [FlavorText!]!
+}
+
+type PokemonConnection {
+  edges: [PokemonEdge]
+  nodes: [Pokemon]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonEdge {
+  node: Pokemon
+  cursor: String!
+}
+
+"""
+Pokémon are the creatures that inhabit the world of the Pokémon games.
+They can be caught using Pokéballs and trained by battling with other Pokémon.
+Each Pokémon belongs to a specific species but may take on a variant
+which makes it differ from other Pokémon of the same species, such as base stats, available abilities and typings.
+See Bulbapedia for greater detail.
+"""
+type Pokemon {
+  """
+  The identifier for this resource.
+  """
+  id: Int!
+  name: String!
+  baseExperience: Int!
+  height: Int!
+  isDefault: Boolean!
+  order: Int!
+  weight: Int!
+  abilities: [PokemonAbility!]!
+  forms: [NamedAPIResource!]!
+  gameIndices: [VersionGameIndex!]!
+  heldItems: [PokemonHeldItem!]!
+  locationAreaEncounters: String!
+  moves: [PokemonMove!]!
+  sprites: PokemonSprites!
+  species: NamedAPIResource!
+  stats: [PokemonStat!]!
+  types: [PokemonType!]!
+}
+
+type PokemonAbility {
+  isHidden: Boolean!
+  slot: Int!
+  ability: NamedAPIResource!
+}
+
+type PokemonType {
+  slot: Int!
+  type: NamedAPIResource!
+}
+
+type PokemonHeldItem {
+  item: NamedAPIResource!
+  versionDetails: [PokemonHeldItemVersion!]!
+}
+
+type PokemonHeldItemVersion {
+  version: NamedAPIResource!
+  rarity: Int!
+}
+
+type PokemonMove {
+  move: NamedAPIResource!
+  versionGroupDetails: [PokemonMoveVersion!]!
+}
+
+type PokemonMoveVersion {
+  moveLearnMethod: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+  levelLearnedAt: Int!
+}
+
+type PokemonStat {
+  stat: NamedAPIResource!
+  effort: Int!
+  baseStat: Int!
+}
+
+type PokemonSprites {
+  frontDefault: String
+  frontShiny: String
+  frontFemale: String
+  frontShinyFemale: String
+  backDefault: String
+  backShiny: String
+  backFemale: String
+  backShinyFemale: String
+}
+
+type Query {
+  berries(first: Int, after: String): BerryConnection!
+  berry(id: Int!): Berry
+
+  berryFirmnesses(first: Int, after: String): BerryFirmnessConnection!
+  berryFirmness(id: Int!): BerryFirmness
+
+  berryFlavors(first: Int, after: String): BerryFlavorConnection!
+  berryFlavor(id: Int!): BerryFlavor
+
+  contestTypes(first: Int, after: String): ContestTypeConnection!
+  contestType(id: Int!): ContestType
+
+  contestEffects(first: Int, after: String): ContestEffectConnection!
+  contestEffect(id: Int!): ContestEffect
+
+  pokemons(first: Int, after: String): PokemonConnection!
+  pokemon(id: Int): Pokemon
+}

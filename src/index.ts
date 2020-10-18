@@ -1,8 +1,14 @@
+import { join } from "path";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
+import { loadSchemaSync } from "@graphql-tools/load";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
-import schema from "./schema";
 import * as rootValue from "./resolvers";
+
+const schema = loadSchemaSync(join(__dirname, "schema.graphql"), {
+  loaders: [new GraphQLFileLoader()],
+});
 
 const app = express();
 
