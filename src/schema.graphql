@@ -5,32 +5,6 @@ type PageInfo {
   endCursor: String
 }
 
-type NamedAPIResource {
-  name: String!
-  url: String!
-}
-
-type Name {
-  name: String!
-  language: NamedAPIResource!
-}
-
-type Effect {
-  effect: String!
-  language: NamedAPIResource!
-}
-
-type VersionGameIndex {
-  gameIndex: Int!
-  version: NamedAPIResource!
-}
-
-type FlavorText {
-  flavorText: String!
-  language: NamedAPIResource!
-  version: NamedAPIResource
-}
-
 type BerryConnection {
   edges: [BerryEdge]
   nodes: [Berry]
@@ -152,6 +126,879 @@ type ContestEffect {
   flavorTextEntries: [FlavorText!]!
 }
 
+type SuperContestEffectConnection {
+  edges: [SuperContestEffectEdge]
+  nodes: [SuperContestEffect]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SuperContestEffectEdge {
+  node: SuperContestEffect
+  cursor: String!
+}
+
+type SuperContestEffect {
+  id: Int!
+  appeal: Int!
+  flavorTextEntries: [FlavorText!]!
+  moves: [NamedAPIResource!]!
+}
+
+type EncounterMethodConnection {
+  edges: [EncounterMethodEdge]
+  nodes: [EncounterMethod]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EncounterMethodEdge {
+  node: EncounterMethod
+  cursor: String!
+}
+
+type EncounterMethod {
+  id: Int!
+  name: String!
+  order: Int!
+  names: [Name!]!
+}
+
+type EncounterConditionConnection {
+  edges: [EncounterConditionEdge]
+  nodes: [EncounterCondition]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EncounterConditionEdge {
+  node: EncounterCondition
+  cursor: String!
+}
+
+type EncounterCondition {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  values: [NamedAPIResource!]!
+}
+
+type EncounterConditionValueConnection {
+  edges: [EncounterConditionValueEdge]
+  nodes: [EncounterConditionValue]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EncounterConditionValueEdge {
+  node: EncounterConditionValue
+  cursor: String!
+}
+
+type EncounterConditionValue {
+  id: Int!
+  name: String!
+  condition: NamedAPIResource!
+  names: [Name!]!
+}
+
+type EvolutionChainConnection {
+  edges: [EvolutionChainEdge]
+  nodes: [EvolutionChain]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EvolutionChainEdge {
+  node: EvolutionChain
+  cursor: String!
+}
+
+type EvolutionChain {
+  id: Int!
+  babyTriggerItem: NamedAPIResource!
+  chain: ChainLink!
+}
+
+type ChainLink {
+  isBaby: Boolean!
+  species: NamedAPIResource!
+  evolutionDetails: [EvolutionDetail!]!
+  evolvesTo: [ChainLink!]!
+}
+
+type EvolutionDetail {
+  item: NamedAPIResource!
+  trigger: NamedAPIResource!
+  gender: Int!
+  heldItem: NamedAPIResource!
+  knownMove: NamedAPIResource!
+  knowmMoveType: NamedAPIResource!
+  location: NamedAPIResource!
+  minLevel: Int!
+  minHappiness: Int!
+  minBeauty: Int!
+  minAffection: Int!
+  needsOverworldRain: Boolean!
+  partySpecies: NamedAPIResource!
+  partyType: NamedAPIResource!
+  relativePhysicalStats: Int!
+  timeOfDay: String!
+  tradeSpecies: NamedAPIResource!
+  turnUpsideDown: Boolean!
+}
+
+type EvolutionTriggerConnection {
+  edges: [EvolutionTriggerEdge]
+  nodes: [EvolutionTrigger]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EvolutionTriggerEdge {
+  node: EvolutionTrigger
+  cursor: String!
+}
+
+type EvolutionTrigger {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type GenerationConnection {
+  edges: [GenerationEdge]
+  nodes: [Generation]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GenerationEdge {
+  node: Generation
+  cursor: String!
+}
+
+type Generation {
+  id: Int!
+  name: String!
+  abilities: [NamedAPIResource!]!
+  names: [Name!]!
+  mainRegion: NamedAPIResource!
+  moves: [NamedAPIResource!]!
+  pokemonSpecies: [NamedAPIResource!]!
+  types: [NamedAPIResource!]!
+  versionGroups: [NamedAPIResource!]!
+}
+
+type PokedexConnection {
+  edges: [PokedexEdge]
+  nodes: [Pokedex]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokedexEdge {
+  node: Pokedex
+  cursor: String!
+}
+
+type Pokedex {
+  id: Int!
+  name: String!
+  isMainSeries: Boolean!
+  descriptions: [Description!]!
+  names: [Name!]!
+  pokemonEntires: [PokemonEntry!]!
+  region: NamedAPIResource!
+  versionGroups: [NamedAPIResource!]!
+}
+
+type PokemonEntry {
+  entryNumber: Int!
+  pokemonSpecies: NamedAPIResource!
+}
+
+type VersionConnection {
+  edges: [VersionEdge]
+  nodes: [Version]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type VersionEdge {
+  node: Version
+  cursor: String!
+}
+
+type Version {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  versionGroup: NamedAPIResource!
+}
+
+type VersionGroupConnection {
+  edges: [VersionGroupEdge]
+  nodes: [VersionGroup]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type VersionGroupEdge {
+  node: VersionGroup
+  cursor: String!
+}
+
+type VersionGroup {
+  id: Int!
+  name: String!
+  order: Int!
+  generation: NamedAPIResource!
+  moveLearnMethods: [NamedAPIResource!]!
+  pokedexes: [NamedAPIResource!]!
+  regions: [NamedAPIResource!]!
+  versions: [NamedAPIResource!]!
+}
+
+type ItemConnection {
+  edges: [ItemEdge]
+  nodes: [Item]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ItemEdge {
+  node: Item
+  cursor: String!
+}
+
+type Item {
+  id: Int!
+  name: String!
+  cost: Int!
+  flingPower: Int!
+  flingEffect: NamedAPIResource!
+  attributes: [NamedAPIResource!]!
+  category: NamedAPIResource!
+  effectEntries: [VerboseEffect!]!
+  flavorTextEntries: [VersionGroupFlavorText!]!
+  gameIndices: [GenerationGameIndex!]!
+  names: [Name!]!
+  sprites: ItemSprites!
+  heldByPokemon: [ItemHolderPokemon!]!
+  babyTriggerFor: APIResource!
+  machines: [MachineVersionDetail!]!
+}
+
+type ItemSprites {
+  default: String!
+}
+
+type ItemHolderPokemon {
+  pokemon: NamedAPIResource!
+  versionDetails: [ItemHolderPokemonVersionDetail!]!
+}
+
+type ItemHolderPokemonVersionDetail {
+  rarity: Int!
+  version: NamedAPIResource!
+}
+
+type ItemAttributeConnection {
+  edges: [ItemAttributeEdge]
+  nodes: [ItemAttribute]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ItemAttributeEdge {
+  node: ItemAttribute
+  cursor: String!
+}
+
+type ItemAttribute {
+  id: Int!
+  name: String!
+  items: [NamedAPIResource!]!
+  names: [Name!]!
+  descriptions: [Description!]!
+}
+
+type ItemCategoryConnection {
+  edges: [ItemCategoryEdge]
+  nodes: [ItemCategory]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ItemCategoryEdge {
+  node: ItemCategory
+  cursor: String!
+}
+
+type ItemCategory {
+  id: Int!
+  name: String!
+  items: [NamedAPIResource!]!
+  names: [Name!]!
+  pocket: NamedAPIResource!
+}
+
+type ItemFlingEffectConnection {
+  edges: [ItemFlingEffectEdge]
+  nodes: [ItemFlingEffect]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ItemFlingEffectEdge {
+  node: ItemFlingEffect
+  cursor: String!
+}
+
+type ItemFlingEffect {
+  id: Int!
+  name: String!
+  effectEntries: [Effect!]!
+  items: [NamedAPIResource!]!
+}
+
+type ItemPocketConnection {
+  edges: [ItemPocketEdge]
+  nodes: [ItemPocket]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ItemPocketEdge {
+  node: ItemPocket
+  cursor: String!
+}
+
+type ItemPocket {
+  id: Int!
+  name: String!
+  categories: [NamedAPIResource!]!
+  names: [Name!]!
+}
+
+type LocationConnection {
+  edges: [LocationEdge]
+  nodes: [Location]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type LocationEdge {
+  node: Location
+  cursor: String!
+}
+
+type Location {
+  id: Int!
+  name: String!
+  region: NamedAPIResource!
+  names: [Name!]!
+  gameIndices: [GenerationGameIndex!]!
+  areas: [NamedAPIResource!]!
+}
+
+type LocationAreaConnection {
+  edges: [LocationAreaEdge]
+  nodes: [LocationArea]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type LocationAreaEdge {
+  node: LocationArea
+  cursor: String!
+}
+
+type LocationArea {
+  id: Int!
+  name: String!
+  gameIndex: Int!
+  encounterMethodRates: [EncounterMethodRate!]!
+  location: NamedAPIResource!
+  names: [Name!]!
+  pokemonEncounters: [PokemonEncounter!]!
+}
+
+type EncounterMethodRate {
+  encounterMethod: NamedAPIResource!
+  versionDetails: [EncounterVersionDetails!]!
+}
+
+type EncounterVersionDetails {
+  rate: Int!
+  version: NamedAPIResource!
+}
+
+type PokemonEncounter {
+  pokemon: NamedAPIResource!
+  versionDetails: [VersionEncounterDetail!]!
+}
+
+type PalParkAreaConnection {
+  edges: [PalParkAreaEdge]
+  nodes: [PalParkArea]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PalParkAreaEdge {
+  node: PalParkArea
+  cursor: String!
+}
+
+type PalParkArea {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  pokemonEncounters: [PalParkEncounterSpecies!]!
+}
+
+type PalParkEncounterSpecies {
+  baseScore: Int!
+  rate: Int!
+  pokemonSpecies: NamedAPIResource!
+}
+
+type RegionConnection {
+  edges: [RegionEdge]
+  nodes: [Region]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type RegionEdge {
+  node: Region
+  cursor: String!
+}
+
+type Region {
+  id: Int!
+  locations: [NamedAPIResource!]!
+  name: String!
+  names: [Name!]!
+  mainGeneration: NamedAPIResource!
+  pokedexes: [NamedAPIResource!]!
+  versionGroups: [NamedAPIResource!]!
+}
+
+type MachineConnection {
+  edges: [MachineEdge]
+  nodes: [Machine]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MachineEdge {
+  node: Machine
+  cursor: String!
+}
+
+type Machine {
+  id: Int!
+  item: NamedAPIResource!
+  move: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+}
+
+type MoveConnection {
+  edges: [MoveEdge]
+  nodes: [Move]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveEdge {
+  node: Move
+  cursor: String!
+}
+
+type Move {
+  id: Int!
+  name: String!
+  accuracy: Int!
+  effectChance: Int!
+  pp: Int!
+  priority: Int!
+  power: Int!
+  contestCombos: ContestComboSets!
+  contestType: NamedAPIResource!
+  contestEffect: APIResource!
+  damageClass: NamedAPIResource!
+  effectEntries: [VerboseEffect!]!
+  effectChanges: [AbilityEffectChange!]!
+  flavorTextEntries: [MoveFlavorText!]!
+  generation: NamedAPIResource!
+  machines: [MachineVersionDetail!]!
+  meta: MoveMetaData!
+  names: [Name!]!
+  pastValues: [PastMoveStatValues!]!
+  statChanges: [MoveStatChange!]!
+  superContestEffect: APIResource!
+  target: NamedAPIResource!
+  type: NamedAPIResource!
+}
+
+type ContestComboSets {
+  normal: ContestComboDetail!
+  super: ContestComboDetail!
+}
+
+type ContestComboDetail {
+  useBefore: [NamedAPIResource!]!
+  useAfter: [NamedAPIResource!]!
+}
+
+type MoveFlavorText {
+  flavorText: String!
+  laguage: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+}
+
+type MoveMetaData {
+  ailment: NamedAPIResource!
+  category: NamedAPIResource!
+  minHits: Int!
+  maxHits: Int!
+  minTurns: Int!
+  maxTurns: Int!
+  drain: Int!
+  healing: Int!
+  critRate: Int!
+  ailmentChance: Int!
+  flinchChance: Int!
+  statChance: Int!
+}
+
+type MoveStatChange {
+  change: Int!
+  stat: NamedAPIResource!
+}
+
+type PastMoveStatValues {
+  accuracy: Int!
+  effectChance: Int!
+  power: Int!
+  pp: Int!
+  effectEntries: [VerboseEffect!]!
+  type: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+}
+
+type MoveAilmentConnection {
+  edges: [MoveAilmentEdge]
+  nodes: [MoveAilment]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveAilmentEdge {
+  node: MoveAilment
+  cursor: String!
+}
+
+type MoveAilment {
+  id: Int!
+  name: String!
+  moves: [NamedAPIResource!]!
+  names: [Name!]!
+}
+
+type MoveBattleStyleConnection {
+  edges: [MoveBattleStyleEdge]
+  nodes: [MoveBattleStyle]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveBattleStyleEdge {
+  node: MoveBattleStyle
+  cursor: String!
+}
+
+type MoveBattleStyle {
+  id: Int!
+  name: String!
+  names: [Name!]!
+}
+
+type MoveCategoryConnection {
+  edges: [MoveCategoryEdge]
+  nodes: [MoveCategory]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveCategoryEdge {
+  node: MoveCategory
+  cursor: String!
+}
+
+type MoveCategory {
+  id: Int!
+  name: String!
+  moves: [NamedAPIResource!]!
+  descriptions: [Description!]!
+}
+
+type MoveDamageClassConnection {
+  edges: [MoveDamageClassEdge]
+  nodes: [MoveDamageClass]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveDamageClassEdge {
+  node: MoveDamageClass
+  cursor: String!
+}
+
+type MoveDamageClass {
+  id: Int!
+  name: String!
+  descriptions: [Description!]!
+  moves: [NamedAPIResource!]!
+  names: [Name!]!
+}
+
+type MoveLearnMethodConnection {
+  edges: [MoveLearnMethodEdge]
+  nodes: [MoveLearnMethod]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveLearnMethodEdge {
+  node: MoveLearnMethod
+  cursor: String!
+}
+
+type MoveLearnMethod {
+  id: Int!
+  name: String!
+  descriptions: [Description!]!
+  names: [Name!]!
+  versionGroups: [NamedAPIResource!]!
+}
+
+type MoveTargetConnection {
+  edges: [MoveTargetEdge]
+  nodes: [MoveTarget]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MoveTargetEdge {
+  node: MoveTarget
+  cursor: String!
+}
+
+type MoveTarget {
+  id: Int!
+  name: String!
+  descriptions: [Description!]!
+  moves: [NamedAPIResource!]!
+  names: [Name!]!
+}
+
+type AbilityConnection {
+  edges: [AbilityEdge]
+  nodes: [Ability]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AbilityEdge {
+  node: Ability
+  cursor: String!
+}
+
+type Ability {
+  id: Int!
+  name: String!
+  isMainSeries: Boolean!
+  generation: NamedAPIResource!
+  names: [Name!]!
+  effectEntries: [VerboseEffect!]!
+  effectChanges: [AbilityEffectChange!]!
+  flavorTextEntries: [AbilityFlavorText!]!
+  pokemon: [AbilityPokemon!]!
+}
+
+type AbilityEffectChange {
+  effectEntries: [Effect!]!
+  versionGroup: NamedAPIResource!
+}
+
+type AbilityFlavorText {
+  flavorText: String!
+  language: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+}
+
+type AbilityPokemon {
+  isHidden: Boolean!
+  slot: Int!
+  pokemon: NamedAPIResource!
+}
+
+type CharacteristicConnection {
+  edges: [CharacteristicEdge]
+  nodes: [Characteristic]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CharacteristicEdge {
+  node: Characteristic
+  cursor: String!
+}
+
+type Characteristic {
+  id: Int!
+  geneModulo: Int!
+  possibleValues: [Int!]!
+}
+
+type EggGroupConnection {
+  edges: [EggGroupEdge]
+  nodes: [EggGroup]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EggGroupEdge {
+  node: EggGroup
+  cursor: String!
+}
+
+type EggGroup {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type GenderConnection {
+  edges: [GenderEdge]
+  nodes: [Gender]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GenderEdge {
+  node: Gender
+  cursor: String!
+}
+
+type Gender {
+  id: Int!
+  name: String!
+  pokemonSpeciesDetails: [PokemonSpeciesGender!]!
+  requiredForEvolution: [NamedAPIResource!]!
+}
+
+type PokemonSpeciesGender {
+  rate: Int!
+  pokemonSpecies: NamedAPIResource!
+}
+
+type GrowthRateConnection {
+  edges: [GrowthRateEdge]
+  nodes: [GrowthRate]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GrowthRateEdge {
+  node: GrowthRate
+  cursor: String!
+}
+
+type GrowthRate {
+  id: Int!
+  name: String!
+  formula: String!
+  descriptions: [Description!]!
+  levels: [GrowthRateExperienceLevel!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type GrowthRateExperienceLevel {
+  level: Int!
+  experience: Int!
+}
+
+type NatureConnection {
+  edges: [NatureEdge]
+  nodes: [Nature]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type NatureEdge {
+  node: Nature
+  cursor: String!
+}
+
+type Nature {
+  id: Int!
+  name: String!
+  decreasedStat: NamedAPIResource!
+  increasedStat: NamedAPIResource!
+  hatesFlavor: NamedAPIResource!
+  likesFlavor: NamedAPIResource!
+  pokeathlonStatChanges: [NatureStatChange!]!
+  moveBattleStylePreferences: [MoveBattleStylePreference!]!
+  names: [Name!]!
+}
+
+type NatureStatChange {
+  maxChange: Int!
+  pokeathlonStat: NamedAPIResource!
+}
+
+type MoveBattleStylePreference {
+  lowHpPreference: Int!
+  highHpPreference: Int!
+  moveBattleStyle: NamedAPIResource!
+}
+
+type PokeathlonStatConnection {
+  edges: [PokeathlonStatEdge]
+  nodes: [PokeathlonStat]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokeathlonStatEdge {
+  node: PokeathlonStat
+  cursor: String!
+}
+
+type PokeathlonStat {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  affectingNatures: [NaturePokeathlonStatAffectSets!]!
+}
+
+type NaturePokeathlonStatAffectSets {
+  increase: [NaturePokeathlonStatAffect]
+  decrease: [NaturePokeathlonStatAffect]
+}
+
+type NaturePokeathlonStatAffect {
+  maxChange: Int!
+  nature: NamedAPIResource!
+}
+
 type PokemonConnection {
   edges: [PokemonEdge]
   nodes: [Pokemon]
@@ -243,6 +1090,353 @@ type PokemonSprites {
   backShinyFemale: String
 }
 
+type PokemonLocationAreaConnection {
+  edges: [PokemonLocationAreaEdge]
+  nodes: [PokemonLocationArea]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonLocationAreaEdge {
+  node: PokemonLocationArea
+  cursor: String!
+}
+
+type PokemonLocationArea {
+  locationArea: NamedAPIResource!
+  versionDetails: [VersionEncounterDetail!]!
+}
+
+type PokemonColorConnection {
+  edges: [PokemonColorEdge]
+  nodes: [PokemonColor]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonColorEdge {
+  node: PokemonColor
+  cursor: String!
+}
+
+type PokemonColor {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type PokemonFormConnection {
+  edges: [PokemonFormEdge]
+  nodes: [PokemonForm]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonFormEdge {
+  node: PokemonForm
+  cursor: String!
+}
+
+type PokemonForm {
+  id: Int!
+  name: String!
+  order: Int!
+  formOrder: Int!
+  isDefault: Boolean!
+  isBattleOnly: Boolean!
+  isMega: Boolean!
+  formName: String!
+  pokemon: NamedAPIResource!
+  sprites: PokemonFormSprites!
+  versionGroup: NamedAPIResource!
+  names: [Name!]!
+  formNames: [Name!]!
+}
+
+type PokemonFormSprites {
+  frontDefault: String!
+  frontShiny: String!
+  backDefault: String!
+  backShiny: String!
+}
+
+type PokemonHabitatConnection {
+  edges: [PokemonHabitatEdge]
+  nodes: [PokemonHabitat]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonHabitatEdge {
+  node: PokemonHabitat
+  cursor: String!
+}
+
+type PokemonHabitat {
+  id: Int!
+  name: String!
+  names: [Name!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type PokemonShapeConnection {
+  edges: [PokemonShapeEdge]
+  nodes: [PokemonShape]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonShapeEdge {
+  node: PokemonShape
+  cursor: String!
+}
+
+type PokemonShape {
+  id: Int!
+  name: String!
+  awesomeNames: [AwesomeName!]!
+  names: [Name!]!
+  pokemonSpecies: [NamedAPIResource!]!
+}
+
+type AwesomeName {
+  awesomeName: String!
+  language: NamedAPIResource!
+}
+
+type PokemonSpeciesConnection {
+  edges: [PokemonSpeciesEdge]
+  nodes: [PokemonSpecies]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PokemonSpeciesEdge {
+  node: PokemonSpecies
+  cursor: String!
+}
+
+type PokemonSpecies {
+  id: Int!
+  name: String!
+  order: Int!
+  genderRate: Int!
+  captureRate: Int!
+  baseHappiness: Int!
+  isBaby: Boolean!
+  isLegendary: Boolean!
+  isMythical: Boolean!
+  hatchCounter: Int!
+  hasGenderDifferences: Boolean!
+  formsSwitchable: Boolean!
+  growthRate: NamedAPIResource!
+  pokedexNumbers: [PokemonSpeciesDexEntry!]!
+  eggGroups: [NamedAPIResource!]!
+  color: NamedAPIResource!
+  shape: NamedAPIResource!
+  evolvesFromSpecies: NamedAPIResource!
+  evolutionChain: APIResource!
+  habitat: NamedAPIResource!
+  generation: NamedAPIResource!
+  names: [Name!]!
+  palParkEncounters: [PalParkEncounterArea!]!
+  flavorTextEntries: [FlavorText!]!
+  formDescriptions: [Description!]!
+  genera: [Genus!]!
+  varieties: [PokemonSpeciesVariety!]!
+}
+
+type Genus {
+  genus: String!
+  language: NamedAPIResource!
+}
+
+type PokemonSpeciesDexEntry {
+  entryNumber: Int!
+  pokedex: NamedAPIResource!
+}
+
+type PalParkEncounterArea {
+  baseScore: Int!
+  rate: Int!
+  area: NamedAPIResource!
+}
+
+type PokemonSpeciesVariety {
+  isDefault: Boolean!
+  pokemon: NamedAPIResource!
+}
+
+type StatConnection {
+  edges: [StatEdge]
+  nodes: [Stat]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type StatEdge {
+  node: Stat
+  cursor: String!
+}
+
+type Stat {
+  id: Int!
+  name: String!
+  gameIndex: Int!
+  isBattleOnly: Boolean!
+  affectingMoves: MoveStatAffectSets!
+  affectingNatures: NatureStatAffectSets!
+  characteristics: [APIResource!]!
+  moveDamageClass: NamedAPIResource!
+  names: [Name!]!
+}
+
+type MoveStatAffectSets {
+  increase: MoveStatAffect!
+  decrease: MoveStatAffect!
+}
+
+type MoveStatAffect {
+  change: Int!
+  move: NamedAPIResource!
+}
+
+type NatureStatAffectSets {
+  increase: NamedAPIResource!
+  decrease: NamedAPIResource!
+}
+
+type TypeConnection {
+  edges: [TypeEdge]
+  nodes: [Type]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TypeEdge {
+  node: Type
+  cursor: String!
+}
+
+type Type {
+  id: Int!
+  name: String!
+  damageRelations: TypeRelations!
+  gameIndices: [GenerationGameIndex!]!
+  generation: NamedAPIResource!
+  moveDamageClass: NamedAPIResource!
+  names: [Name!]!
+  pokemon: [TypePokemon!]!
+  moves: [NamedAPIResource!]!
+}
+
+type TypePokemon {
+  slot: Int!
+  pokemon: NamedAPIResource!
+}
+
+type TypeRelations {
+  noDamageTo: [NamedAPIResource!]!
+  halfDamageTo: [NamedAPIResource!]!
+  doubleDamageTo: [NamedAPIResource!]!
+  noDamageFrom: [NamedAPIResource!]!
+  halfDamageFrom: [NamedAPIResource!]!
+  doubleDamageFrom: [NamedAPIResource!]!
+}
+
+type LanguageConnection {
+  edges: [LanguageEdge]
+  nodes: [Language]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type LanguageEdge {
+  node: Language
+  cursor: String!
+}
+
+type Language {
+  id: Int!
+  name: String!
+  official: Boolean!
+  iso639: String!
+  iso3166: String!
+  names: [Name!]!
+}
+
+type APIResource {
+  url: String!
+}
+
+type Description {
+  description: String!
+  language: NamedAPIResource!
+}
+
+type Effect {
+  effect: String!
+  language: NamedAPIResource!
+}
+
+type Encounter {
+  minLevel: Int!
+  maxLevel: Int!
+  conditionValues: [NamedAPIResource!]!
+  chance: Int!
+  method: NamedAPIResource!
+}
+
+type FlavorText {
+  flavorText: String!
+  language: NamedAPIResource!
+  version: NamedAPIResource
+}
+
+type GenerationGameIndex {
+  gameIndex: Int!
+  generation: NamedAPIResource!
+}
+
+type MachineVersionDetail {
+  machine: APIResource!
+  versionGroup: NamedAPIResource!
+}
+
+type Name {
+  name: String!
+  language: NamedAPIResource!
+}
+
+type NamedAPIResource {
+  name: String!
+  url: String!
+}
+
+type VerboseEffect {
+  effect: String!
+  shortEffect: String!
+  language: NamedAPIResource!
+}
+
+type VersionEncounterDetail {
+  version: NamedAPIResource!
+  maxChance: Int!
+  encounterDetails: [Encounter!]!
+}
+
+type VersionGameIndex {
+  gameIndex: Int!
+  version: NamedAPIResource!
+}
+
+type VersionGroupFlavorText {
+  text: String!
+  language: NamedAPIResource!
+  versionGroup: NamedAPIResource!
+}
+
 type Query {
   berries(first: Int, after: String): BerryConnection!
   berry(id: Int!): Berry
@@ -259,6 +1453,141 @@ type Query {
   contestEffects(first: Int, after: String): ContestEffectConnection!
   contestEffect(id: Int!): ContestEffect
 
+  superContestEffects(first: Int, after: String): SuperContestEffectConnection!
+  superContestEffect(id: Int!): SuperContestEffect
+
+  encounterMethods(first: Int, after: String): EncounterMethodConnection!
+  encounterMethod(id: Int!): EncounterMethod
+
+  encounterConditions(first: Int, after: String): EncounterConditionConnection!
+  encounterCondition(id: Int!): EncounterCondition
+
+  encounterConditionValues(
+    first: Int
+    after: String
+  ): EncounterConditionValueConnection!
+  encounterConditionValue(id: Int!): EncounterConditionValue
+
+  evolutionChains(first: Int, after: String): EvolutionChainConnection!
+  evolutionChain(id: Int!): EvolutionChain
+
+  evolutionTriggers(first: Int, after: String): EvolutionTriggerConnection!
+  evolutionTrigger(id: Int!): EvolutionTrigger
+
+  generations(first: Int, after: String): GenerationConnection!
+  generation(id: Int!): Generation
+
+  pokedexes(first: Int, after: String): PokedexConnection!
+  pokedex(id: Int!): Pokedex
+
+  versions(first: Int, after: String): VersionConnection!
+  version(id: Int!): Version
+
+  versionGroups(first: Int, after: String): VersionGroupConnection!
+  versionGroup(id: Int!): VersionGroup
+
+  items(first: Int, after: String): ItemConnection!
+  item(id: Int!): Item
+
+  itemAttributes(first: Int, after: String): ItemAttributeConnection!
+  itemAttribute(id: Int!): ItemAttribute
+
+  itemCategories(first: Int, after: String): ItemCategoryConnection!
+  itemCategory(id: Int!): ItemCategory
+
+  itemFlingEffects(first: Int, after: String): ItemFlingEffectConnection!
+  itemFlingEffect(id: Int!): ItemFlingEffect
+
+  itemPockets(first: Int, after: String): ItemPocketConnection!
+  itemPocket(id: Int!): ItemPocket
+
+  locations(first: Int, after: String): LocationConnection!
+  location(id: Int!): Location
+
+  locationAreas(first: Int, after: String): LocationAreaConnection!
+  locationArea(id: Int!): LocationArea
+
+  palParkAreas(first: Int, after: String): PalParkAreaConnection!
+  palParkArea(id: Int!): PalParkArea
+
+  regions(first: Int, after: String): RegionConnection!
+  region(id: Int!): Region
+
+  machines(first: Int, after: String): MachineConnection!
+  machine(id: Int!): Machine
+
+  moves(first: Int, after: String): MoveConnection!
+  move(id: Int!): Move
+
+  moveAilments(first: Int, after: String): MoveAilmentConnection!
+  moveAilment(id: Int!): MoveAilment
+
+  moveBattleStyles(first: Int, after: String): MoveBattleStyleConnection!
+  moveBattleStyle(id: Int!): MoveBattleStyle
+
+  moveCategories(first: Int, after: String): MoveCategoryConnection!
+  moveCategory(id: Int!): MoveCategory
+
+  moveDamageClasses(first: Int, after: String): MoveDamageClassConnection!
+  moveDamageClass(id: Int!): MoveDamageClass
+
+  moveLearnMethods(first: Int, after: String): MoveLearnMethodConnection!
+  moveLearnMethod(id: Int!): MoveLearnMethod
+
+  moveTargets(first: Int, after: String): MoveTargetConnection!
+  moveTarget(id: Int!): MoveTarget
+
+  abilities(first: Int, after: String): AbilityConnection!
+  ability(id: Int!): Ability
+
+  characteristics(first: Int, after: String): CharacteristicConnection!
+  characteristic(id: Int!): Characteristic
+
+  eggGroups(first: Int, after: String): EggGroupConnection!
+  eggGroup(id: Int!): EggGroup
+
+  genders(first: Int!, after: String): GenderConnection
+  gender(id: Int!): Gender
+
+  growthRates(first: Int, after: String): GrowthRateConnection!
+  growthRate(id: Int!): GrowthRate
+
+  natures(first: Int, after: String): NatureConnection!
+  nature(id: Int!): Nature
+
+  pokeathlonStats(first: Int, after: String): PokeathlonStatConnection!
+  pokeathlonStat(id: Int!): PokeathlonStat
+
   pokemons(first: Int, after: String): PokemonConnection!
   pokemon(id: Int): Pokemon
+
+  pokemonLocationAreas(
+    first: Int
+    after: String
+  ): PokemonLocationAreaConnection!
+  pokemonLocationArea(id: Int!): PokemonLocationArea
+
+  pokemonColors(first: Int, after: String): PokemonColorConnection!
+  pokemonColor(id: Int!): PokemonColor
+
+  pokemonForms(first: Int, after: String): PokemonFormConnection!
+  pokemonForm(id: Int!): PokemonForm
+
+  pokemonHabitats(first: Int, after: String): PokemonHabitatConnection!
+  pokemonHabitat(id: Int!): PokemonHabitat
+
+  pokemonShapes(first: Int, after: String): PokemonShapeConnection!
+  pokemonShape(id: Int!): PokemonShape
+
+  pokemonMultipleSpecies(first: Int, after: String): PokemonSpeciesConnection!
+  pokemonSingleSpecies(id: Int!): PokemonSpecies
+
+  stats(first: Int, after: String): StatConnection!
+  stat(id: Int!): Stat
+
+  types(first: Int, after: String): TypeConnection!
+  type(id: Int!): Type
+
+  languages(first: Int, after: String): LanguageConnection!
+  language(id: Int!): Language
 }

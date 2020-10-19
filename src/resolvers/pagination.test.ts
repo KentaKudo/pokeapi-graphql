@@ -5,7 +5,7 @@ const { Response } = jest.requireActual("node-fetch");
 
 import { mocked } from "ts-jest/utils";
 
-import { berry, berries } from "./resolvers";
+import { berry, berries } from "./berries";
 
 afterEach(() => mocked(fetch).mockReset());
 
